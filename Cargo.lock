@@ -906,6 +906,7 @@ dependencies = [
  "aws-sdk-textract",
  "dotenv",
  "tokio",
+ "tokio-stream",
 ]
 
 [[package]]

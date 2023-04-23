@@ -12,3 +12,4 @@ aws-sdk-textract = "0.26.0"
 aws-sdk-sqs = "0.26.0"
 tokio = { version = "1", features = ["full"] }
 dotenv = "0.15.0"
+tokio-stream = "0.1.12"
