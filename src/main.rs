@@ -35,7 +35,7 @@ async fn main() -> Result<(), Error> {
 
     let s3_object = S3Object::builder()
         .bucket("learningio")
-        .name("images/23-04-2023_12:56:54_test_Inklusionens-pædagogik1.pdf")
+        .name("images/23-04-2023_14:58:33_test_ENERGY STAR.pdf")
         .build();
 
     println!("{:?}", s3_object);
