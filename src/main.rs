@@ -32,7 +32,7 @@ async fn receive(
         for message in rcv_message_output.messages.unwrap_or_default() {
             println!("Got the message: {:#?}", message);
 
-            ocr_textract_extract(textract_client, message.body());
+            ocr_textract_extract(textract_client, message.body().unwrap().to_string()).await;
 
             let delete_message_output = client
                 .delete_message()
