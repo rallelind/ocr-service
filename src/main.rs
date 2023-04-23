@@ -3,15 +3,19 @@ use aws_sdk_sqs::{Client, Error};
 use dotenv::dotenv;
 
 async fn receive(client: &Client, queue_url: &String) -> Result<(), Error> {
-    let rcv_message_output = client.receive_message().queue_url(queue_url).send().await?;
+    loop {
+        let rcv_message_output = client.receive_message().queue_url(queue_url).send().await?;
+        
+        for message in rcv_message_output.messages.unwrap_or_default() {
+            println!("Got the message: {:#?}", message);
 
-    println!("Messages from queue with url: {}", queue_url);
-
-    for message in rcv_message_output.messages.unwrap_or_default() {
-        println!("Got the message: {:#?}", message);
+            let delete_message_output = client.delete_message()
+            .queue_url(queue_url)
+            .receipt_handle(message.receipt_handle.clone().unwrap())
+            .send()
+            .await?;
+        }
     }
-
-    Ok(())
 }
 
 #[tokio::main]
