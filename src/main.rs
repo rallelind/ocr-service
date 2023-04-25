@@ -14,7 +14,7 @@ async fn ocr_textract_extract(textract_client: &textract::Client, file_name: Str
         .document(Document::builder().s3_object(s3_object).build())
         .send()
         .await
-        .expect("file");
+        .expect("error finding file");
 
     for text in res.blocks().expect("error reading block") {
         println!("{:?}", text.clone());
