@@ -34,7 +34,7 @@ async fn receive(
 
             ocr_textract_extract(textract_client, message.body().unwrap().to_string()).await;
 
-            let delete_message_output = client
+            client
                 .delete_message()
                 .queue_url(queue_url)
                 .receipt_handle(message.receipt_handle.clone().unwrap())
